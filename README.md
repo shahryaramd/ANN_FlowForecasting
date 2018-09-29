@@ -1,5 +1,4 @@
-# ANN_FlowForecasting
-ANN Based Reservoir Inflow Forecasting
+# ANN Based Reservoir Inflow Forecasting
 
 This repository contains Matlab code to obtain Forecast Reservoir Inflow for lead tmes of 1-7 days using ANN
 based forecasting model, setup for Pensacola dam's drainage basin.
