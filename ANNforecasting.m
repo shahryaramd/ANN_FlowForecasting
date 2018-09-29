@@ -1,5 +1,5 @@
 %% ANN Reservoir Inflow Forecasting  
-% Obtain Forecast Reservoir Inflow for lead tmes of 1-7 days using ANN
+% Obtain forecast reservoir inflow for lead tmes of 1-7 days using ANN
 % based forecasting model, setup for Pensacola dam's drainage basin.
 % A set of metrics are calculated at the end to assess the performance.
 
