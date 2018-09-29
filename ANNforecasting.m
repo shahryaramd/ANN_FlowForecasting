@@ -1,5 +1,5 @@
 %% ANN Reservoir Inflow Forecasting  
-% Obtain forecast reservoir inflow for lead tmes of 1-7 days using ANN
+% Obtain Forecast Reservoir Inflow for lead tmes of 1-7 days using ANN
 % based forecasting model, setup for Pensacola dam's drainage basin.
 % A set of metrics are calculated at the end to assess the performance.
 
@@ -73,7 +73,7 @@ BFImax=0.73;
 for nl=7:-1:1 
     % Define hindcast flow
     nn=8-nl;
-    QhcL(:,nn)=datobs(:,nl+1);
+    QhcL(:,nn)=datobs(:,nl+1);  %Lagged hindcast flows from current day (L0) to 6 days before 
     for k=2:size(dat,1)
         b(k,nn)=min(QhcL(k,nn),((1 - BFImax) * a * b(k-1,nn) + ( 1 - a ) * BFImax * QhcL(k,nn)) / ( 1 - a * BFImax) );
         r(k,nn)=QhcL(k,nn)-b(k,nn);
@@ -121,7 +121,7 @@ for nn=1:7   % Model for each lead time
             rQ =  [ry(nn-1,:)'  ry(nn-2,:)' ry(nn-3,:)' ];
             rQV = [ryV(nn-1,:)' ryV(nn-2,:)' ryV(nn-3,:)'];
     end
-    %  Predcitor nodes
+    %  Predictor nodes
     x=[dprecL(range,nn+3) dprecL(range,nn+2) dprecL(range,nn+1)...  
         dtmaxL(range,nn+1)    ...  
         dtminL(range,nn+1)  ... 
@@ -210,8 +210,9 @@ for nn=1:7   % Model for each lead time
     SSU = sum((tV - u).^2);
     nseV(nn,1) = 1 - SSE/SSU;
 end
-statsnnCal=[nse corr];      %stats
-statsnnVal=[nseV rmseV]     
+% validation stats
+nseV 
+rmseV     
 
 %% Training-Validation Streamflow Plots
 obs_plV=obsV';
@@ -276,4 +277,3 @@ plot([1:7], nseV, 'b-o')
 xlabel('Lead, days')
 legend('NN Calibrated','NN Validated')
 title('NSE')
-
