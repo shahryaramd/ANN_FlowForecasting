@@ -90,43 +90,35 @@ for nn=1:7   % Model for each lead time
     obs(:,nn) = QobsL(range,nn);    
     obsV(:,nn) = QobsL(rangeV,nn);
     
-    % IF-ELSE loop to use forecast flow/baseflow/runoff at previous lead
-    % for subsequent day's forecasts starting L2
+    % IF-ELSE loop to use forecast baseflow/runoff at previous lead times
+    % to be used for subsequent day's forecasts starting L2
     if nn==1
-            xQ = [QhcL(range,1) QhcL(range,2) ];
-            xQV = [QhcL(rangeV,1) QhcL(rangeV,2)];
-            bQ = [b(range,1) b(range,2) b(range,3) ];
-            bQV = [b(rangeV,1) b(rangeV,2) b(rangeV,3)];
-            rQ = [r(range,1) r(range,2) r(range,3) ];
-            rQV = [r(rangeV,1) r(rangeV,2) r(rangeV,3)];
-        elseif nn==2
-            xQ =  [y(nn-1,:)'  QhcL(range,1)  ];
-            xQV = [yV(nn-1,:)' QhcL(rangeV,1) ];
-            bQ =  [by(nn-1,:)'  b(range,1) b(range,2) ];
-            bQV = [byV(nn-1,:)' b(rangeV,1) b(rangeV,2)];
-            rQ =  [ry(nn-1,:)'  r(range,1) r(range,2) ];
-            rQV = [ryV(nn-1,:)' r(rangeV,1) r(rangeV,2)];
-        elseif nn==3
-            xQ = [y(nn-1,:)' y(nn-2,:)' ];
-            xQV = [yV(nn-1,:)' yV(nn-2,:)'  ];
-            bQ =  [by(nn-1,:)'  by(nn-2,:)' b(range,1)];
-            bQV = [byV(nn-1,:)' byV(nn-2,:)' b(rangeV,1)];
-            rQ =  [ry(nn-1,:)'  ry(nn-2,:)' r(range,1)];
-            rQV = [ryV(nn-1,:)' ryV(nn-2,:)' r(rangeV,1)];
-        else
-            xQ = [y(nn-1,:)' y(nn-2,:)' ];
-            xQV = [yV(nn-1,:)' yV(nn-2,:)' ];
-            bQ =  [by(nn-1,:)'  by(nn-2,:)' by(nn-3,:)' ];
-            bQV = [byV(nn-1,:)' byV(nn-2,:)' byV(nn-3,:)'];
-            rQ =  [ry(nn-1,:)'  ry(nn-2,:)' ry(nn-3,:)' ];
-            rQV = [ryV(nn-1,:)' ryV(nn-2,:)' ryV(nn-3,:)'];
+        bQ = [b(range,1) b(range,2) b(range,3) ];
+        bQV = [b(rangeV,1) b(rangeV,2) b(rangeV,3)];
+        rQ = [r(range,1) r(range,2) r(range,3) ];
+        rQV = [r(rangeV,1) r(rangeV,2) r(rangeV,3)];
+    elseif nn==2
+        bQ =  [by(nn-1,:)'  b(range,1) b(range,2) ];
+        bQV = [byV(nn-1,:)' b(rangeV,1) b(rangeV,2)];
+        rQ =  [ry(nn-1,:)'  r(range,1) r(range,2) ];
+        rQV = [ryV(nn-1,:)' r(rangeV,1) r(rangeV,2)];
+    elseif nn==3
+        bQ =  [by(nn-1,:)'  by(nn-2,:)' b(range,1)];
+        bQV = [byV(nn-1,:)' byV(nn-2,:)' b(rangeV,1)];
+        rQ =  [ry(nn-1,:)'  ry(nn-2,:)' r(range,1)];
+        rQV = [ryV(nn-1,:)' ryV(nn-2,:)' r(rangeV,1)];
+    else
+        bQ =  [by(nn-1,:)'  by(nn-2,:)' by(nn-3,:)' ];
+        bQV = [byV(nn-1,:)' byV(nn-2,:)' byV(nn-3,:)'];
+        rQ =  [ry(nn-1,:)'  ry(nn-2,:)' ry(nn-3,:)' ];
+        rQV = [ryV(nn-1,:)' ryV(nn-2,:)' ryV(nn-3,:)'];
     end
     %  Predictor nodes
-    x=[dprecL(range,nn+3) dprecL(range,nn+2) dprecL(range,nn+1)...  
-        dtmaxL(range,nn+1)    ...  
-        dtminL(range,nn+1)  ... 
-        sm(range,6) sm(range,5) ...
-        rQ bQ ];
+    x=[dprecL(range,nn+3) dprecL(range,nn+2) dprecL(range,nn+1)...  %forecast, antecedent, antecedent precip
+        dtmaxL(range,nn+1)    ...   %antecedent tmax
+        dtminL(range,nn+1)  ...     %antecedent tmin
+        sm(range,6) sm(range,5) ... %antecedent soil moisture
+        rQ bQ ];                    %antecedent runoff, baseflow
     xV=[dprecL(rangeV,nn+3) dprecL(rangeV,nn+2) dprecL(rangeV,nn+1)...  
         dtmaxL(rangeV,nn+1) ...  
         dtminL(rangeV,nn+1)  ...
@@ -277,3 +269,4 @@ plot([1:7], nseV, 'b-o')
 xlabel('Lead, days')
 legend('NN Calibrated','NN Validated')
 title('NSE')
+
