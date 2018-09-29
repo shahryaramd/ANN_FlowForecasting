@@ -18,7 +18,7 @@ OUTPUTS
 Time series of forecast streamflow for the training period (variable 'y')
 and validation period (variable 'yV') for lead 1-7 days
 
-NOTE: Matlab required Neural Network / Deep Learning Toolbox 
+NOTE: Matlab requires Neural Network / Deep Learning Toolbox 
 
 Developed by: 
 
