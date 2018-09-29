@@ -9,7 +9,7 @@ INPUTS
 
 Time series of:
 1. GFS forecast (7 days lead) - Precipitation, Min/Max Temperature
-2. Insitu data from GSOD - - Precipitation, Min/Max Temp, Windspeed
+2. Insitu data from GSOD - - Precipitation, Min/Max Temperature, Windspeed
 3. Observed Antecedent Streamflow
 4. Observed Antecedent Soil Moisture
 
@@ -23,5 +23,4 @@ NOTE: Matlab requires Neural Network / Deep Learning Toolbox
 Developed by: 
 
 Shahryar Khalique Ahmad (skahmad@uw.edu)
-Homepage: http://students.washington.edu/skahmad/
 Department of Civil and Environmental Engineering, University of Washington
