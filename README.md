@@ -1,7 +1,10 @@
 # ANN Based Reservoir Inflow Forecasting
 
 This repository contains Matlab code to obtain Forecast Reservoir Inflow for lead tmes of 1-7 days using ANN
-based forecasting model, setup for any drainage basin. Currently, the code is set up to generate forecast inflow for Lost Creek Dam.
+based forecasting model, setup for any drainage basin. 
+
+Currently, the script is set up to generate forecast inflow for Lost Creek dam, however predictor files for Detroit and Cougar dam are also provided. 
+
 A set of metrics are calculated at the end to assess the performance.
 
 
