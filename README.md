@@ -22,9 +22,11 @@ NOTE: Matlab requires Neural Network / Deep Learning Toolbox
 ## Citation
 
 Please cite this work as:
+
 Ahmad, S.K. and Hossain, F., 2019. A generic data-driven technique for forecasting of reservoir inflow: Application for hydropower maximization. Environmental Modelling & Software, 119, pp.147-165. https://doi.org/10.1016/j.envsoft.2019.06.008
 
 ## Contact
 
-Shahryar Khalique Ahmad (skahmad@uw.edu)
+Shahryar Khalique Ahmad (https://students.washington.edu/skahmad/ | skahmad@uw.edu)
+
 Department of Civil and Environmental Engineering, University of Washington
